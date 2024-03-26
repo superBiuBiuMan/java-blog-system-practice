@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.dreamlove.blog_system.mapper.UserInfoMapper">
+    <select id="selectByUserName" resultType="top.dreamlove.blog_system.bean.UserInfo">
+        select * from blog_system.userinfo where username = #{username}
+    </select>
+</mapper>

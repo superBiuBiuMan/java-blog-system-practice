@@ -1,14 +1,21 @@
 package top.dreamlove.blog_system.bean;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("userinfo")
 public class UserInfo {
     private Integer id;
+    @NotEmpty(message = "数据不能为空")
     private String username;
     private String password;
     private String photo;

@@ -18,7 +18,7 @@ class BlogSystemApplicationTests {
 
     @Test
     void mybatis(){
-        List<UserInfo> userInfos = userInfoMapper.selectList(null);
-        userInfos.forEach(System.out::println);
+        // List<UserInfo> userInfos = userInfoMapper.selectList(null);
+        // userInfos.forEach(System.out::println);
     }
 }

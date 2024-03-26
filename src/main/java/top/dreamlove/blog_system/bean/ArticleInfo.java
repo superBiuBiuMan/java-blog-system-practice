@@ -1,7 +1,9 @@
 package top.dreamlove.blog_system.bean;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -9,6 +11,8 @@ import java.util.Date;
  * 文章表
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("articleinfo")
 public class ArticleInfo {
     private Integer id;
