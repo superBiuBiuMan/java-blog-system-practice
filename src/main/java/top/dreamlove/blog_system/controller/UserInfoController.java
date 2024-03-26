@@ -8,7 +8,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import top.dreamlove.blog_system.bean.UserInfo;
 import top.dreamlove.blog_system.service.UserInfoService;
+import top.dreamlove.blog_system.utils.GlobalException;
+import top.dreamlove.blog_system.utils.Result;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,6 +19,7 @@ import javax.validation.constraints.NotNull;
 @RestController
 @Slf4j
 @Validated
+
 public class UserInfoController {
     @Autowired
     UserInfoService userInfoService;
@@ -28,20 +32,5 @@ public class UserInfoController {
             System.out.println("defaultMessage = " + defaultMessage);
         }
         return new UserInfo();
-    }
-
-    @PostMapping("/test")
-    public String createDemo( @Valid @RequestBody UserInfo abc, BindingResult result){
-        if(result.hasErrors())
-            return result.getFieldError().getDefaultMessage();
-        return "success";
-    }
-
-    @GetMapping("/test2")
-    public String getUserStr(
-            @RequestParam("username") @NotEmpty(message = "名字不能为空") String name
-    ) {
-
-        return "success" + name;
     }
 }
