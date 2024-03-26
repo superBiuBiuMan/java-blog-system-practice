@@ -1,3 +1,12 @@
 server:
   port: 8080
-
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/blog_system?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  configuration:
+    # 驼峰转小写字母
+    map-underscore-to-camel-case: true
