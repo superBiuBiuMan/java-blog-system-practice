@@ -23,7 +23,7 @@ public class ExceptionAdvice {
     @ExceptionHandler(Exception.class)
     public Result handlerException(Exception e) {
         // logger.error((e.getMessage(), e);////日志记录
-        return Result.error().message(e + "系统异常");
+        return Result.error().message(e.toString());
     }
 
     /**

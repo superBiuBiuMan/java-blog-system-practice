@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import top.dreamlove.blog_system.interceptor.LoginInterceptor;
 
-// @Configuration
+@Configuration
 public class LoginConfig implements WebMvcConfigurer {
 
     @Override
@@ -13,6 +13,6 @@ public class LoginConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
                 //排除登录接口
-                .excludePathPatterns("/login","/test");
+                .excludePathPatterns("/login");
     }
 }
