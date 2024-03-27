@@ -1,8 +1,8 @@
 package top.dreamlove.blog_system.common;
 
 
-import org.mybatis.logging.Logger;
-import org.mybatis.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import top.dreamlove.blog_system.utils.GlobalException;
@@ -13,7 +13,7 @@ import top.dreamlove.blog_system.utils.Result;
  */
 @RestControllerAdvice
 public class ExceptionAdvice {
-    // private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * 处理 Exception 异常
@@ -22,7 +22,7 @@ public class ExceptionAdvice {
      */
     @ExceptionHandler(Exception.class)
     public Result handlerException(Exception e) {
-        // logger.error((e.getMessage(), e);////日志记录
+        logger.error(e.getMessage(),e);//日志记录
         return Result.error().message(e.toString());
     }
 
@@ -33,7 +33,7 @@ public class ExceptionAdvice {
      */
     @ExceptionHandler(NullPointerException.class)
     public Result handlerNullPointerException(NullPointerException e) {
-        // logger.error(e.getMessage(), e);
+        logger.error(e.getMessage(), e);
         return Result.error().message(e + "空指针异常");
     }
 
@@ -44,7 +44,7 @@ public class ExceptionAdvice {
      */
     @ExceptionHandler(GlobalException.class)
     public Result handlerGlobalException(GlobalException e) {
-        // logger.error(e.getMessage(), e);
+        logger.error(e.getMessage(), e);
         return Result.error().message(e.getMessage()).code(e.getCode());
     }
 
