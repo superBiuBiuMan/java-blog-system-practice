@@ -4,4 +4,8 @@
     <select id="selectByUserName" resultType="top.dreamlove.blog_system.bean.UserInfo">
         select * from blog_system.userinfo where username = #{username}
     </select>
+
+    <insert id="insertUserInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into blog_system.userinfo(username, password,photo) values(#{username},#{password},null)
+    </insert>
 </mapper>

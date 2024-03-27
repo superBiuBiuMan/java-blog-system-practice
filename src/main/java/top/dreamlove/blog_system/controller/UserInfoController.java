@@ -55,9 +55,4 @@ public class UserInfoController {
         }
         return Result.error().message("用户信息不存在");
     }
-
-    @GetMapping("/test")
-    public Result test(){
-        return Result.ok().message("测试");
-    }
 }
