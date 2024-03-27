@@ -34,7 +34,7 @@ public class ExceptionAdvice {
     @ExceptionHandler(NullPointerException.class)
     public Result handlerNullPointerException(NullPointerException e) {
         // logger.error(e.getMessage(), e);
-        return Result.error().message("空指针异常");
+        return Result.error().message(e + "空指针异常");
     }
 
     /**

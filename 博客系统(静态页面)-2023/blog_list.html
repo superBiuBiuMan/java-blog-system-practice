@@ -9,41 +9,45 @@
     <link rel="stylesheet" href="css/blog_list.css">
     <link rel="stylesheet" href="css/mybloglist_bloglist.css">
     <style>
-        
-        .nav{
+        .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             height: 50px;
         }
-        .container{
+
+        .container {
             padding-top: 80px;
             height: auto;
         }
-        .container-right{
+
+        .container-right {
             width: auto;
         }
-        .blog-pagnation-wrapper{
+
+        .blog-pagnation-wrapper {
             height: 40px;
             margin: 16px 0;
             text-align: center;
         }
-        .blog-pagnation-item{
+
+        .blog-pagnation-item {
             display: inline-block;
             padding: 8px;
             border: 1px solid #d0d0d5;
             color: #333;
         }
-        .blog-pagnation-item:hover{
-            background: #4e4eeb;
-            color: #fff;
-        }
-        .blog-pagnation-item.actvie{
+
+        .blog-pagnation-item:hover {
             background: #4e4eeb;
             color: #fff;
         }
 
+        .blog-pagnation-item.actvie {
+            background: #4e4eeb;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -154,12 +158,27 @@
             </div>
             <hr>
             <div class="blog-pagnation-wrapper">
-                <button class="blog-pagnation-item">首页</button> 
-                <button class="blog-pagnation-item">上一页</button>  
+                <button class="blog-pagnation-item">首页</button>
+                <button class="blog-pagnation-item">上一页</button>
                 <button class="blog-pagnation-item">下一页</button>
                 <button class="blog-pagnation-item">末页</button>
             </div>
         </div>
-    </div>
+        <script type="module">
+            import request from './js/request.js';
+            setTimeout(() => {
+                request({
+                    url: "http://127.0.0.1:8080/test",
+                    method: "get",
+                    data: {
+
+                    }
+                }).then(res => {
+                    console.log(res);
+                })
+            }, 2000);
+
+        </script>
 </body>
+
 </html>

@@ -24,7 +24,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 @Validated
-
+@CrossOrigin(originPatterns = "*",allowCredentials = "true")
 public class UserInfoController {
     @Autowired
     UserInfoService userInfoService;
@@ -40,9 +40,10 @@ public class UserInfoController {
             if (userInfo.getPassword().equals(password)){
                 //登录成功
                 //生成jwt
-                String token = JwtUtil.createToken(userName);
+                String token = JwtUtil.createToken(userInfo.getId(),userInfo.getUsername());
                 //创建Cookie
                 Cookie cookie  = new Cookie("token",token);
+                cookie.setPath("/");
                 //设置Cookie有效期
                 cookie.setMaxAge(1 * 60 * 60 * 24 * 7);//七天
                 response.addCookie(cookie);
@@ -53,5 +54,10 @@ public class UserInfoController {
             }
         }
         return Result.error().message("用户信息不存在");
+    }
+
+    @GetMapping("/test")
+    public Result test(){
+        return Result.ok().message("测试");
     }
 }

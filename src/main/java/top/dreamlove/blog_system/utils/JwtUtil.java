@@ -6,6 +6,9 @@ package top.dreamlove.blog_system.utils;
  */
 
 import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTUtil;
+import cn.hutool.jwt.JWTValidator;
+import top.dreamlove.blog_system.bean.UserInfo;
 
 import java.util.Date;
 import java.util.Map;
@@ -22,11 +25,37 @@ public class JwtUtil {
     static final long defaultExpire = 1000 * 60 * 60 * 24 * 7L;
 
     /**
-     * 使用默认过期时间（7天），生成一个JWT
-     *
+     * 验证token是否合理,有效,并返回对应数据
+     * @param token
      * @return
      */
-    public static String createToken(String userName) {
+    public static UserInfo validate(String token){
+        if(token == null) return null;
+        System.out.println("isVarify(token) = " + isVarify(token));
+        // todo 没校验时间好像
+        if(isVarify(token)){
+            return JwtUtil.resolveToken(token);
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * 验证token通过校验
+     * @param token 待验证token
+     * @return 验证结果
+     */
+    public static Boolean isVarify(String token){
+        if(token == null ) return false;
+        return JWT.of(token).setKey(key).verify();
+    }
+
+    /**
+     * 使用默认过期时间（7天），生成一个JWT
+     * @param userName 用户名
+     * @return token
+     */
+    public static String createToken(Integer id,String userName ) {
         return JWT.create()
                 // 设置加密算法(头)
                 .setHeader("alg", "HS256")
@@ -42,9 +71,22 @@ public class JwtUtil {
                 .setSubject("auth")
                 //自定义信息
                 .setPayload("userName",userName)
+                .setPayload("id",id)
                 //生成token
                 .sign();
+    }
 
+    /**
+     * token 校验，并获取 userInfo(id和用户名)
+     * @param token token
+     * @return userDto
+     */
+    public static UserInfo resolveToken(String token){
+        if(!isVarify(token)) return null;
+        JWT jwt = JWT.of(token);
+        Integer id = Integer.parseInt(jwt.getPayload("id").toString());
+        String userName = jwt.getPayload("userName").toString();
+        return new UserInfo(id,userName);
     }
 
     /**
@@ -55,11 +97,4 @@ public class JwtUtil {
      * @return token
      */
 
-
-    /**
-     * 解析token
-     *
-     * @param token jwt token
-     * @return payload
-     */
 }

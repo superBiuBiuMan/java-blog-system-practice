@@ -8,6 +8,8 @@
     <title>登陆页面</title>
     <link rel="stylesheet" href="css/conmmon.css">
     <link rel="stylesheet" href="css/login.css">
+    <script src="./js/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -41,5 +43,26 @@
         </div>
     </div>
 </body>
+<script type="module">
+    import request from './js/request.js';
+    const dom = document.querySelector("#submit");
+
+
+    dom.addEventListener("click", async function () {
+        request({
+            url: "http://127.0.0.1:8080/login",
+            method: "post",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data: {
+                username: document.querySelector("#username").value,
+                password: document.querySelector("#password").value
+            }
+        }).then(res => {
+            console.log(res);
+        })
+    })
+</script>
 
 </html>

@@ -14,6 +14,11 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("userinfo")
 public class UserInfo {
+    public UserInfo(Integer id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
     private Integer id;
     @NotEmpty(message = "数据不能为空")
     private String username;
