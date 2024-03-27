@@ -11,8 +11,19 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
-    // 用户登录
     public UserInfo selectByUserName(String username){
         return userInfoMapper.selectByUserName(username);
+    }
+
+    @Override
+    public Integer userRegister(UserInfo userInfo) {
+        Integer effectRow = userInfoMapper.insertUserInfo(userInfo);
+        if(effectRow < 1){
+            //注册失败
+            return -1;
+        }else{
+            //注册成功
+            return userInfo.getId();
+        }
     }
 }

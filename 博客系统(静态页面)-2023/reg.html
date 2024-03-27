@@ -45,5 +45,25 @@
         </div>
     </div>
 </body>
+<script type="module">
+    import request from './js/request.js';
+    const dom = document.querySelector("#submit");
+
+    dom.addEventListener("click", async function () {
+        request({
+            url: "http://127.0.0.1:8080/register",
+            method: "post",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data: {
+                username: document.querySelector("#username").value,
+                password: document.querySelector("#password").value
+            }
+        }).then(res => {
+            console.log(res);
+        })
+    })
+</script>
 
 </html>

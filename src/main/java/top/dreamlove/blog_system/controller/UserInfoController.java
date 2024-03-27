@@ -18,13 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @Slf4j
 @Validated
-@CrossOrigin(originPatterns = "*",allowCredentials = "true")
+@CrossOrigin(originPatterns = "*",allowCredentials = "true")//跨域设置
 public class UserInfoController {
     @Autowired
     UserInfoService userInfoService;
@@ -54,5 +55,13 @@ public class UserInfoController {
             }
         }
         return Result.error().message("用户信息不存在");
+    }
+
+    @PostMapping( "/register")
+    public Result register(@Valid UserInfo userInfo){
+        if(userInfo == null ) return Result.error().message("用户名或密码不能为空");
+        //注册
+        userInfoService.userRegister(userInfo);
+        return Result.ok().data(Collections.singletonMap("id",userInfo.getId()));
     }
 }

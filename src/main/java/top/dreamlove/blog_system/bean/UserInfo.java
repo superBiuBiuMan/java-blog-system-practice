@@ -18,10 +18,10 @@ public class UserInfo {
         this.id = id;
         this.username = username;
     }
-
     private Integer id;
     @NotEmpty(message = "数据不能为空")
     private String username;
+    @NotEmpty(message = "数据不能为空")
     private String password;
     private String photo;
     private Date createTime;
