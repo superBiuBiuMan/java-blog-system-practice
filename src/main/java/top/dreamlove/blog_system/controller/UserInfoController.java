@@ -2,6 +2,7 @@ package top.dreamlove.blog_system.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -10,6 +11,7 @@ import top.dreamlove.blog_system.bean.UserInfo;
 import top.dreamlove.blog_system.service.UserInfoService;
 import top.dreamlove.blog_system.utils.GlobalException;
 import top.dreamlove.blog_system.utils.JwtUtil;
+import top.dreamlove.blog_system.utils.RedisUtil;
 import top.dreamlove.blog_system.utils.Result;
 
 import javax.servlet.http.Cookie;
@@ -21,6 +23,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @Slf4j
@@ -29,6 +32,8 @@ import java.util.Map;
 public class UserInfoController {
     @Autowired
     UserInfoService userInfoService;
+    @Autowired
+    RedisUtil redisUtil;
 
     @PostMapping("/login")
     public Result login(
@@ -42,6 +47,12 @@ public class UserInfoController {
                 //登录成功
                 //生成jwt
                 String token = JwtUtil.createToken(userInfo.getId(),userInfo.getUsername());
+
+                String tokenKey = "sys:user:refreshToken" + token;
+                //添加redis
+                redisUtil.set(tokenKey,token);
+                redisUtil.expire(tokenKey,1 * 40L);//40秒有效期
+
                 //创建Cookie
                 Cookie cookie  = new Cookie("token",token);
                 cookie.setPath("/");

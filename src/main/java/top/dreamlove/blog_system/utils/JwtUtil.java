@@ -23,8 +23,8 @@ public class JwtUtil {
     // 生成秘钥
     private static final byte[] key = ">S?~hFCiHX9&]x)O(mBnz@4tpsf8,Lqe-\"!'|^:K3YEa;duI{50`%M*oGATPV.c+".getBytes();
     // 有效期7天
-    static final long defaultExpire = 1000 * 60 * 60 * 24 * 7L; //毫秒开始乘
-    // static final long defaultExpire = 1000 * 10L; //毫秒开始乘(设置10秒)
+    // static final long defaultExpire = 1000 * 60 * 60 * 24 * 7L; //毫秒开始乘
+    static final long defaultExpire = 1000 * 10L; //毫秒开始乘(设置20秒)
 
     /**
      * 验证token是否合理,是否过期,并返回对应数据
