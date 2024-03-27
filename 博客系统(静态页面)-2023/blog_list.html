@@ -8,6 +8,7 @@
     <title>博客列表</title>
     <link rel="stylesheet" href="css/blog_list.css">
     <link rel="stylesheet" href="css/mybloglist_bloglist.css">
+    <link rel="stylesheet" href="css/pagination.css">
     <style>
         .nav {
             position: fixed;
@@ -27,26 +28,10 @@
         }
 
         .blog-pagnation-wrapper {
+            display: flex;
             height: 40px;
             margin: 16px 0;
-            text-align: center;
-        }
-
-        .blog-pagnation-item {
-            display: inline-block;
-            padding: 8px;
-            border: 1px solid #d0d0d5;
-            color: #333;
-        }
-
-        .blog-pagnation-item:hover {
-            background: #4e4eeb;
-            color: #fff;
-        }
-
-        .blog-pagnation-item.actvie {
-            background: #4e4eeb;
-            color: #fff;
+            justify-content: center;
         }
     </style>
 </head>
@@ -90,95 +75,45 @@
                 </div>
                 <a href="blog_content.html?id=2" class="detail">查看全文 &gt;&gt;</a>
             </div>
-            <div class="blog">
-                <div class="title">我的第二篇博客</div>
-                <div class="date">2021-06-02</div>
-                <div class="desc">
-                    从今天起, 我要认真敲代码. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum distinctio ullam eum ut
-                    veroab laborum numquam tenetur est in dolorum a sint, assumenda adipisci similique quaerat vel.
-                    Facere,
-                    et.
-                </div>
-                <a href="blog_content.html?id=2" class="detail">查看全文 &gt;&gt;</a>
-            </div>
-            <div class="blog">
-                <div class="title">我的第二篇博客</div>
-                <div class="date">2021-06-02</div>
-                <div class="desc">
-                    从今天起, 我要认真敲代码. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum distinctio ullam eum ut
-                    veroab laborum numquam tenetur est in dolorum a sint, assumenda adipisci similique quaerat vel.
-                    Facere,
-                    et.
-                </div>
-                <a href="blog_content.html?id=2" class="detail">查看全文 &gt;&gt;</a>
-            </div>
-            <div class="blog">
-                <div class="title">我的第二篇博客</div>
-                <div class="date">2021-06-02</div>
-                <div class="desc">
-                    从今天起, 我要认真敲代码. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum distinctio ullam eum ut
-                    veroab laborum numquam tenetur est in dolorum a sint, assumenda adipisci similique quaerat vel.
-                    Facere,
-                    et.
-                </div>
-                <a href="blog_content.html?id=2" class="detail">查看全文 &gt;&gt;</a>
-            </div>
-            <div class="blog">
-                <div class="title">我的第二篇博客</div>
-                <div class="date">2021-06-02</div>
-                <div class="desc">
-                    从今天起, 我要认真敲代码. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum distinctio ullam eum ut
-                    veroab laborum numquam tenetur est in dolorum a sint, assumenda adipisci similique quaerat vel.
-                    Facere,
-                    et.
-                </div>
-                <a href="blog_content.html?id=2" class="detail">查看全文 &gt;&gt;</a>
-            </div>
-            <div class="blog">
-                <div class="title">我的第二篇博客</div>
-                <div class="date">2021-06-02</div>
-                <div class="desc">
-                    从今天起, 我要认真敲代码. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum distinctio ullam eum ut
-                    veroab laborum numquam tenetur est in dolorum a sint, assumenda adipisci similique quaerat vel.
-                    Facere,
-                    et.
-                </div>
-                <a href="blog_content.html?id=2" class="detail">查看全文 &gt;&gt;</a>
-            </div>
-            <div class="blog">
-                <div class="title">我的第二篇博客</div>
-                <div class="date">2021-06-02</div>
-                <div class="desc">
-                    从今天起, 我要认真敲代码. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum distinctio ullam eum ut
-                    veroab laborum numquam tenetur est in dolorum a sint, assumenda adipisci similique quaerat vel.
-                    Facere,
-                    et.
-                </div>
-                <a href="blog_content.html?id=2" class="detail">查看全文 &gt;&gt;</a>
-            </div>
             <hr>
-            <div class="blog-pagnation-wrapper">
-                <button class="blog-pagnation-item">首页</button>
-                <button class="blog-pagnation-item">上一页</button>
-                <button class="blog-pagnation-item">下一页</button>
-                <button class="blog-pagnation-item">末页</button>
-            </div>
         </div>
-        <script type="module">
-            import request from './js/request.js';
-            setTimeout(() => {
-                request({
-                    url: "http://127.0.0.1:8080/test",
-                    method: "get",
-                    data: {
-
-                    }
-                }).then(res => {
-                    console.log(res);
-                })
-            }, 2000);
-
-        </script>
+        <div class="blog-pagnation-wrapper">
+            <!-- <button class="blog-pagnation-item">首页</button>
+            <button class="blog-pagnation-item">上一页</button>
+            <button class="blog-pagnation-item">下一页</button>
+            <button class="blog-pagnation-item">末页</button> -->
+        </div>
+    </div>
 </body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/pagination.min.js"></script>
+<script type="module">
+    import request from './js/request.js';
+    function loadData(page, pageSize) {
+        request({
+            url: "http://127.0.0.1:8080/article/list",
+            method: "get",
+            params: {
+                page,
+                pageSize,
+            }
+        }).then(res => {
+            console.log(`page=${page},pageSize=${pageSize}加载的数据`, res);
+        })
+    }
+    window.onload = () => {
+        loadData(1, 5);
+    }
+    // 分页插件
+    $('.blog-pagnation-wrapper').pagination({
+        dataSource: ['44', '2', '3', '4', '44', '2', '3', '4', '44', '2', '3', '4', '44', '2', '3', '4', '44', '2', '3', '4', '44', '2', '3', '4', '44', '2', '3', '4'],
+        pageSize: 5,
+        showSizeChanger: true,
+        callback: function (data, pagination) {
+            const {pageNumber, pageSize} = pagination;
+            loadData(pageNumber, pageSize);
+        }
+    })
+</script>
 
 </html>
