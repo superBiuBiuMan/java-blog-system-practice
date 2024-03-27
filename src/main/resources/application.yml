@@ -10,3 +10,12 @@ mybatis-plus:
   configuration:
     # 驼峰转小写字母
     map-underscore-to-camel-case: true
+
+#分页器
+pagehelper:
+  #分页合理化参数默认false，当该参数设置为true 时，pageNum <= 0 时，默认显示第一页，pageNum 超过 pageSize 时，显示最后一页。
+  reasonable: true
+  # 分页插件默认参数支持 default-count 形式，自定义扩展的参数，必须大小写一致
+  defaultCount: true
+  # 指定数据库，可以不配置，pagehelper插件会自动检测数据库的类型。
+  helper-dialect: mysql
