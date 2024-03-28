@@ -24,7 +24,7 @@ public class JwtUtil {
     private static final byte[] key = ">S?~hFCiHX9&]x)O(mBnz@4tpsf8,Lqe-\"!'|^:K3YEa;duI{50`%M*oGATPV.c+".getBytes();
     // 有效期7天
     // static final long defaultExpire = 1000 * 60 * 60 * 24 * 7L; //毫秒开始乘
-    static final long defaultExpire = 1000 * 10L; //毫秒开始乘(设置20秒)
+    static final long defaultExpire = 1000 * 10L; //毫秒开始乘(设置10秒)
 
     /**
      * 验证token是否合理,是否过期,并返回对应数据
@@ -44,6 +44,25 @@ public class JwtUtil {
             return null;
         }
     }
+    /**
+     * 验证是否过期
+     * true 过期
+     * false 未过期
+     */
+    public static boolean isExpire(String token){
+        if(token == null) return true;
+        if(JwtUtil.isVarify(token)){
+            try{
+                JWTValidator.of(token).validateDate(DateUtil.date());
+                return false;//未过期
+            }catch (Exception e){
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+
 
     /**
      * 验证token通过校验

@@ -51,7 +51,7 @@ public class UserInfoController {
                 String tokenKey = "sys:user:refreshToken" + token;
                 //添加redis
                 redisUtil.set(tokenKey,token);
-                redisUtil.expire(tokenKey,1 * 40L);//40秒有效期
+                redisUtil.expire(tokenKey,1 * 20L);//20秒有效期
 
                 //创建Cookie
                 Cookie cookie  = new Cookie("token",token);
